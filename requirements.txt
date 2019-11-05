@@ -1,0 +1,23 @@
+django     ; python_version >= '3.5'
+django-bootstrap-form
+django-environ
+django-pascal-templates
+django-powerbank
+djangorestframework
+djangorestframework-jsonapi
+enum34 ; python_version < '3.4'
+gunicorn
+html2text
+invoke
+psycopg2-binary
+pendulum
+python-dotenv
+whitenoise
+
+pytest
+pytest-django>=3.4.3
+pytest-lazy-fixture
+factory-boy
+mock
+
+

@@ -1,0 +1,33 @@
+version: '3'
+services:
+  web:
+    build: .
+    command: gunicorn --chdir=/app/src -b 0.0.0.0:8000 secure_share_kiss.wsgi:application --timeout 240 --graceful-timeout 230 --log-file -
+#    command: python3 /app/manage.py runserver
+    expose:
+      - 8000
+    ports:
+      - "8000:8000"
+    depends_on:
+      - database
+    links:
+      - "database:database"
+    environment:
+      - DJANGO_SETTINGS_MODULE=secure_share_kiss.settings
+      - BASE_URL=http://127.0.0.1:8000
+      - DATABASE_URL=psql://user:password@database:5432/application
+      - SECRET_KEY=unsafe-testing-key
+      - MEDIA_SERVED=True
+      - CREATE_SUPER_USER=adm:adm@example.com:adm
+      # Change these to accommodate your mail server setup
+      - EMAIL_URL=smtp+tls://SMTP_Injection:?@smtp.sparkpostmail.com:587
+      # Comment this to use default backend
+      - EMAIL_BACKEND=django.core.mail.backends.console.EmailBackend
+  database:
+    image: postgres
+    environment:
+      # When changed remove existing database
+      # docker-compose down --volumes
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: application

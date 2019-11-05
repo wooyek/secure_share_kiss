@@ -1,0 +1,29 @@
+{% extends "default.html" %}
+{% block content %}
+<div class="row mt-5">
+  <div class="col-xl-8 offset-xl-2 ">
+    <div class="card shadow">
+      <div class="card-header ">Share details</div>
+      <table class="table table-hover mb-0">
+          <tbody>
+          <tr>
+              <th scope="row">email</th>
+              <td>{{ object.email }}</td>
+          </tr>
+          <tr>
+              <th scope="row">url</th>
+              <td>{{ object.url }}</td>
+          </tr>
+          <tr>
+              <th scope="row">secret</th>
+              <td>{{ object.secret }}</td>
+          </tr>
+          </tbody>
+      </table>
+    <div class="card-footer te">
+      <a class="btn btn-secondary" href="{% block url %}{% url 'secure_share:SharedUrlAuthorize' object.pk %}{% endblock %}">View</a>
+    </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
